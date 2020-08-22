@@ -9,4 +9,3 @@
 #define SDL_NAME(X)	SDL_##X
 
 #endif /* _SDLname_h_ */
-

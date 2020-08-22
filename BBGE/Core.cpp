@@ -82,13 +82,13 @@ void Core::initIcon()
 
 	SDL_SysWMinfo wminfo;
 	SDL_VERSION(&wminfo.version)
-	if (SDL_GetWMInfo(/*gScreen, */&wminfo) != 1)
+	if (SDL_GetWindowWMInfo(gScreen, &wminfo) != 1)
 	{
 		//errorLog("wrong SDL version");
 		// error: wrong SDL version
 	}
 
-	HWND hwnd = wminfo.window;//wminfo.info.win.window;
+	HWND hwnd = wminfo.info.win.window;
 
 	::SetClassLong(hwnd, GCLP_HICON, (LONG) icon_windows);
 #endif

@@ -1,6 +1,6 @@
 /*
     SDL - Simple DirectMedia Layer
-    Copyright (C) 1997-2009 Sam Lantinga
+    Copyright (C) 1997-2012 Sam Lantinga
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,52 +20,26 @@
     slouken@libsdl.org
 */
 
-#ifndef _SDL_config_minimal_h
-#define _SDL_config_minimal_h
+#ifndef _SDL_config_h
+#define _SDL_config_h
 
 #include "SDL_platform.h"
 
-/* This is the minimal configuration that can be used to build SDL */
-
-#include <stdarg.h>
-
-#ifdef _MSC_VER
-//typedef __int8 int8_t;
-//typedef unsigned __int8 uint8_t;
-//typedef __int16 int16_t;
-//typedef unsigned __int16 uint16_t;
-//typedef __int32 int32_t;
-//typedef unsigned __int32 uint32_t;
-//typedef size_t uintptr_t;
-#include <stdint.h>
+/* Add any platform that doesn't build using the configure system */
+#if defined(__DREAMCAST__)
+#include "SDL_config_dreamcast.h"
+#elif defined(__MACOS__)
+#include "SDL_config_macos.h"
+#elif defined(__MACOSX__)
+#include "SDL_config_macosx.h"
+#elif defined(__SYMBIAN32__)
+#include "SDL_config_symbian.h"  /* must be before win32! */
+#elif defined(__WIN32__)
+#include "SDL_config_win32.h"
+#elif defined(__OS2__)
+#include "SDL_config_os2.h"
 #else
-#include <stdint.h>
-#include <stdio.h>
-#endif
+#include "SDL_config_minimal.h"
+#endif /* platform config */
 
-/* Enable the dummy audio driver (src/audio/dummy/\*.c) */
-#define SDL_AUDIO_DRIVER_DUMMY	1
-
-/* Enable the stub cdrom driver (src/cdrom/dummy/\*.c) */
-#define SDL_CDROM_DISABLED	1
-
-/* Enable the stub joystick driver (src/joystick/dummy/\*.c) */
-#define SDL_JOYSTICK_DISABLED	1
-
-/* Enable the stub shared object loader (src/loadso/dummy/\*.c) */
-#define SDL_LOADSO_DISABLED	1
-
-/* Enable the stub thread support (src/thread/generic/\*.c) */
-#define SDL_THREADS_DISABLED	1
-
-/* Enable the stub timer support (src/timer/dummy/\*.c) */
-#define SDL_TIMERS_DISABLED	1
-
-/* Enable the dummy video driver (src/video/dummy/\*.c) */
-#define SDL_VIDEO_DRIVER_DUMMY	1
-
-#if defined(_WINDOWS) || defined(_WIN32)
-#define SDL_VIDEO_DRIVER_WINDIB 1
-#endif
-
-#endif /* _SDL_config_minimal_h */
+#endif /* _SDL_config_h */
