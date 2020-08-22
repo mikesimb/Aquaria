@@ -29,10 +29,18 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 	#undef min
 	#undef max
 
-    #ifdef _MSC_VER
+  /*  #ifdef _MSC_VER
         #define strtof (float)strtod
         #define snprintf _snprintf
-    #endif
+    #endif*/
+	#if _MSC_VER>=1900	
+	#include "stdio.h"
+		_ACRTIMP_ALT FILE* __cdecl __acrt_iob_func(unsigned);
+		#ifdef __cplusplus
+			extern "C"
+		#endif
+		FILE * __cdecl __iob_func(unsigned i);
+	#endif /* _MSC_VER>=1900 */
 #endif
 
 #include "BBGECompileConfig.h"
@@ -105,7 +113,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #ifdef _MSC_VER
 #pragma warning(disable:4786)
-#pragma warning(disable:4005)
+//#pragma warning(disable:4005)
 #pragma warning(disable:4305)
 
 #pragma warning(disable:4018) // signed/unsigned mismatch

@@ -25,6 +25,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #ifdef BBGE_BUILD_WINDOWS
 	#include <shellapi.h>
+
+	#if _MSC_VER>=1900
+		FILE * __cdecl __iob_func(unsigned i) {
+		return __acrt_iob_func(i);
+		}
+	#endif /* _MSC_VER>=1900 */
 #endif
 
 #ifdef _MSC_VER
